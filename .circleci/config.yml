@@ -39,7 +39,7 @@ jobs:
       - run:
           name: Setup Yarn
           command: |
-            sudo apt-get install yarn
+            sudo yum install yarn
             yum install nodejs --enablerepo=epel
 
       # Database setup
