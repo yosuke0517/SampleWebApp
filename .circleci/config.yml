@@ -40,6 +40,7 @@ jobs:
           name: Setup Yarn
           command: |
             sudo apt-get install yarn
+            yum install nodejs --enablerepo=epel
 
       # Database setup
       - run: bundle exec rake db:create
