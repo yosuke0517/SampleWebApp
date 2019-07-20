@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/ruby:2.6.1
+      - image: circleci/ruby:2.6.2-node-browsers
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -35,12 +35,6 @@ jobs:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-
-      - run:
-          name: Setup Yarn
-          command: |
-            sudo yum install yarn
-            yum install nodejs --enablerepo=epel
 
       # Database setup
       - run: bundle exec rake db:create
