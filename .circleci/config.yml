@@ -83,7 +83,7 @@ jobs:
           docker push ${ECR_DOMAIN}/sample-image:latest
 
 workflows:
-  version: 2.1
+  version: 2
   test:
     jobs:
       - build
