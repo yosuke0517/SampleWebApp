@@ -38,6 +38,18 @@ jobs:
           docker push ${ECR_DOMAIN}/sample-image:$CIRCLE_SHA1
           docker push ${ECR_DOMAIN}/sample-image:latest
 
+workflows:
+  version: 2
+  test:
+    jobs:
+      - build
+      - build_image:
+        requires:
+          - build
+        filters:
+          branches:
+            only: master
+
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -80,15 +92,3 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
-
-workflows:
-  version: 2
-  test:
-    jobs:
-      - build
-      - build_image:
-        requires:
-          - build
-        filters:
-          branches:
-            only: master
