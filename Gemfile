@@ -5,8 +5,6 @@ ruby '2.6.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -25,7 +23,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
@@ -34,13 +32,14 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.1.0', require: false
+#gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rspec-rails', '~> 3.6'
-  gem 'rspec_junit_formatter'
+  # Use mysql as the database for Active Record
+  gem 'mysql2', '>= 0.4.4', '< 0.6.0'
+  gem 'factory_bot_rails', '~> 5.0'
 end
 
 group :development do
@@ -50,16 +49,40 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'solargraph', group: :development
+  gem 'pry-byebug', group: :development
 end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
-  # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
+  gem 'rspec-rails', '~> 3.8'
+  gem 'launchy'
+  gem 'webdrivers'
+end
+
+group :production do
+  gem 'pg', '~> 0.18.4'
+  #aws
+  gem "aws-sdk-s3", require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'therubyracer'
+
+#web
+gem "bootstrap", ">= 4.3.1"
+gem 'jquery-rails', '~> 4.3.1'
+gem 'mini_racer'
+gem 'kaminari', '~> 1.1.1'
+gem 'kaminari-bootstrap'
+gem 'slim-rails'
+gem 'html2slim'
+
+gem 'config'
+gem 'rubocop'
+gem 'rails-i18n', '~> 5.1'
+gem 'rinku'
+gem 'ransack', github: 'activerecord-hackery/ransack'
+gem 'mini_magick', '~> 4.8'
