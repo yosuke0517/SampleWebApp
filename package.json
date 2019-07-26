@@ -1,7 +1,5 @@
 {
-  "name": "myapp",
+  "name": "SampleWebApp",
   "private": true,
-  "dependencies": {
-    "ckeditor": "^4.11.4"
-  }
+  "dependencies": {}
 }

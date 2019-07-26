@@ -1,19 +1,8 @@
-version: '3'
+version: "3"
 services:
-  db:
-    image: mysql:5.7
-    volumes:
-      - ./tmp/db:/var/lib/postgresql/data
-    environment:
-            - MYSQL_DATABASE=myapp_development
-            - MYSQL_ROOT_USER=root
-            - MYSQL_ROOT_PASSWORD=passw0rd
-            - TZ=Japan
   app:
-    stdin_open: true
-    tty: true
-    build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle install && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    build:
+      context: .
     env_file: .docker-env
     volumes:
       - .:/app:cached
@@ -23,3 +12,13 @@ services:
       - db
     depends_on:
       - db
+    entrypoint: bash -c
+    command: |
+      "bundle install && \
+      bundle exec rails s -b 0.0.0.0 -p 3000"
+  db:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - "3306:3306"
