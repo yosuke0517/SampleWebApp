@@ -1,0 +1,44 @@
+{
+  "containerDefinitions": [
+    {
+      "memoryReservation": 600,
+      "environment": [
+        {
+          "name": "RAILS_ENV",
+          "value": "production"
+        },
+        {
+          "name": "RACK_ENV",
+          "value": "production"
+        }
+      ],
+      "name": "sample-rails",
+      "mountPoints": [],
+      "image": "289972500308.dkr.ecr.ap-northeast-1.amazonaws.com/sample-image:latest",
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-region": "ap-northeast-1",
+          "awslogs-stream-prefix": "service",
+          "awslogs-group": "sample-service"
+        }
+      },
+      "cpu": 333,
+      "portMappings": [
+        {
+          "protocol": "tcp",
+          "containerPort": 3000,
+          "hostPort": 0
+        }
+      ],
+      "command": [
+        "bundle",
+        "exec",
+        "pumactl",
+        "start"
+      ],
+      "essential": true,
+      "volumesFrom": []
+    }
+  ]
+}
