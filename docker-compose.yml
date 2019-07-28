@@ -1,24 +1,52 @@
-version: "3"
+# version: "3"
+# services:
+#   app:
+#     stdin_open: true
+#     tty: true
+#     build:
+#       context: .
+#     env_file: .docker-env
+#     volumes:
+#       - .:/app:cached
+#     ports:
+#       - "3000:3000"
+#     links:
+#       - db
+#     depends_on:
+#       - db
+#     entrypoint: bash -c
+#     command: |
+#       "bundle install && \
+#       rm -f /app/tmp/pids/server.pid
+#       bundle exec rails s -b 0.0.0.0 -p 3000"
+#   db:
+#     image: mysql:5.7
+#     volumes:
+#       - ./tmp/db:/etc/mysql
+#     environment:
+#       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+#     ports:
+#       - "3306:3306"
+version: '3'
 services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - ./tmp/db:/etc/mysql
+    environment:
+            - MYSQL_DATABASE=rails_sample_development
+            - MYSQL_ROOT_USER=root
+            - MYSQL_ROOT_PASSWORD=passw0rd
+            - TZ=Japan
   app:
-    build:
-      context: .
+    stdin_open: true
+    tty: true
+    build: .
     env_file: .docker-env
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - .:/app:cached
     ports:
       - "3000:3000"
-    links:
-      - db
     depends_on:
       - db
-    entrypoint: bash -c
-    command: |
-      "bundle install && \
-      bundle exec rails s -b 0.0.0.0 -p 3000"
-  db:
-    image: mysql:5.7
-    environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - "3306:3306"

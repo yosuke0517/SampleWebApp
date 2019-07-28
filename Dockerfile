@@ -4,6 +4,8 @@ ARG RAILS_ENV
 ARG RAILS_MASTER_KEY
 
 # install nodejs vim etc...
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+        && apt-get install -y nodejs
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs vim mysql-client
 
 ENV APP_ROOT /app
@@ -12,7 +14,7 @@ ENV RAILS_ENV ${RAILS_ENV}
 ENV RAILS_MASTER_KEY ${RAILS_MASTER_KEY}
 
 WORKDIR $APP_ROOT
-# まずは Gemfileのみを ADDしbundle install Λߦ͢·͍
+# まずは Gemfileのみを ADDしbundle install
 ADD Gemfile $APP_ROOT
 ADD Gemfile.lock $APP_ROOT
 RUN \
