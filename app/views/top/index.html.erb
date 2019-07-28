@@ -1,2 +1,15 @@
 <h1>Top(test)</h1>
 <h1>qanda2019へ載せ替えます</h1>
+<div>
+  <%= form_for @todo do |form| %>
+    <%= form.text_field :description %>
+    <%= form.submit %>
+  <% end %>
+</div>
+<p>
+  <ul>
+  <% @todos.each do |todo|%>
+    <li><%= todo.description %></li>
+  <% end %>
+  </ul>
+</p>
