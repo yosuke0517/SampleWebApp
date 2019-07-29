@@ -2,14 +2,18 @@
 <h1>qanda2019へ載せ替えます</h1>
 <div>
   <%= form_for @todo do |form| %>
-    <%= form.text_field :description %>
-    <%= form.submit %>
+    <li><%= form.text_field :description %></li>
+    <li><%= form.file_field :image %></li>
+    <li><%= form.submit %></li>
   <% end %>
 </div>
 <p>
   <ul>
   <% @todos.each do |todo|%>
     <li><%= todo.description %></li>
+    <% if todo.image.attached? %>
+      <%= image_tag todo.image %>
+    <% end %>
   <% end %>
   </ul>
 </p>

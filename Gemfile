@@ -64,3 +64,4 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'therubyracer'
 gem 'mysql2', '>= 0.4.4', '< 0.6.0'
+gem "aws-sdk-s3", require: false
