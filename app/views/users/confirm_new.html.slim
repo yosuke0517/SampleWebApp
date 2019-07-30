@@ -1,5 +1,6 @@
 h1 登録内容の確認（ユーザ登録）
-= form_with model: [:admin, @user], local: true do |f|
+/ = form_with model: [:admin, @user], local: true do |f|
+= form_with model: [@user], local: true do |f|
   table.table.table-hover
     tbody
       tr
