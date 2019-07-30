@@ -22,8 +22,13 @@ RUN \
 bundle install && \
 rm -rf ~/.gem
 ADD . $APP_ROOT
-# RAILS_ENV がproduction の時 assets:precompile を実行するようにしている
-RUN if [ "${RAILS_ENV}" = "production" ]; then bundle exec rails assets:precompile; else export RAILS_ENV=development; fi
-RUN rm -f tmp/pids/server.pid
 EXPOSE 3000
+# RAILS_ENV がproduction の時 assets:precompile を実行するようにしている
+#RUN if [ "${RAILS_ENV}" = "production" ]; then bundle exec rails assets:precompile; else export RAILS_ENV=development; fi
+#RUN rm -f tmp/pids/server.pid
+
 CMD ["rails", "server", "-b", "0.0.0.0"]
+
+RUN RAILS_ENV=production bundle exec rake assets:precompile
+RUN rm -f tmp/pids/server.pid
+CMD ["bundle", "exec", "rails", "s", "puma", "-b", "0.0.0.0", "-p", "3000", "-e", "production"]
