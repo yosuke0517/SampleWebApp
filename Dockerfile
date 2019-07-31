@@ -3,14 +3,19 @@ FROM ruby:2.6.1
 ENV LANG C.UTF-8
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
         && apt-get install -y nodejs
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs vim
+RUN apt-get update -qq && apt-get install -y \
+  build-essential \
+  libpq-dev \
+  nodejs \
+  vim
+RUN npm install yarn -g
 
-ENV APP_ROOT /myapp
+ENV APP_ROOT /app
 WORKDIR $APP_ROOT
 ADD Gemfile /app/Gemfile
 ADD Gemfile.lock /app/Gemfile.lock
 RUN bundle install
-COPY . /myapp
+COPY . /app
 
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/

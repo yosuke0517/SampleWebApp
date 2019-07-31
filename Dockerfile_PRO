@@ -12,11 +12,11 @@ RUN apt-get update -qq && apt-get install -y \
   libpq-dev \
   nodejs \
   vim \
-  mysql-client \
-  yarn
+  mysql-client
+RUN npm install yarn -g
 
 
-ENV APP_ROOT /myapp
+ENV APP_ROOT /app
 #あと挿ししたRAILS_ENV と RAILS_MASTER_KEY を環境変数に設定する
 ENV RAILS_ENV ${RAILS_ENV}
 ENV RAILS_MASTER_KEY ${RAILS_MASTER_KEY}
