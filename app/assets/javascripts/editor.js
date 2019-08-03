@@ -1,7 +1,3 @@
-// $(function(){
-//     console.log('hello')
-//     CKEDITOR.replace('editor', {});
-// });
 $(function(){
 ClassicEditor
     .create( document.querySelector( '#editor' ) )
