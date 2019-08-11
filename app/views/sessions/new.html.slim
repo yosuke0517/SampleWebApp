@@ -9,12 +9,15 @@ h1 ログイン
    = f.password_field :password, class: 'form-control', id: 'session_password'
  .form-group
    = f.submit 'ログインする', class: 'btn btn-primary'
-
+h3 SNSログイン
+ul.navbar-nav
+   li.nav-item.active
+          = link_to "twitter Login", auth_twitter_path, class: "btn btn-outline-primary nav-link fa fa-twitter mr-sm-2 my-2 my-sm-2"
 div
   h3.text-left ・サンプルユーザー
   h3 メールアドレス：「sample@email.com」
   h3 パスワード：「password」
 div.mt-5
-  h3 ※アプリ仕様
-  h3 ・シンプルなQ&Aサービス風アプリ
-  h3 ・質問・回答の閲覧はログインしていなくてもできるが、その他の機能はログインしていないとできない。
+  h5 ※アプリ仕様
+  h5 ・シンプルなQ&Aサービス風アプリ
+  h5 ・質問・回答の閲覧はログインしていなくてもできるが、その他の機能はログインしていないとできない。

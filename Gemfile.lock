@@ -84,6 +84,8 @@ GEM
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 1.14.3, < 2)
       sassc-rails (>= 2.0.0)
+    bootstrap-social-rails (4.12.0)
+      railties (>= 3.1)
     builder (3.2.3)
     byebug (11.0.1)
     capybara (3.24.0)
@@ -148,6 +150,8 @@ GEM
       factory_bot (~> 5.0.2)
       railties (>= 4.2.0)
     ffi (1.11.1)
+    font-awesome-rails (4.7.0.5)
+      railties (>= 3.2, < 6.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     hashie (3.6.0)
@@ -384,11 +388,13 @@ DEPENDENCIES
   aws-sdk-s3
   bcrypt (~> 3.1.7)
   bootstrap (>= 4.3.1)
+  bootstrap-social-rails (~> 4.12)
   byebug
   capybara (>= 2.15)
   coffee-rails (~> 4.2)
   config
   factory_bot_rails (~> 5.0)
+  font-awesome-rails (~> 4.7)
   html2slim
   jbuilder (~> 2.5)
   jquery-rails (~> 4.3.1)
@@ -399,8 +405,8 @@ DEPENDENCIES
   mini_magick (>= 4.9.4)
   mini_racer
   mysql2 (>= 0.4.4, < 0.6.0)
-  omniauth
-  omniauth-twitter
+  omniauth (~> 1.9)
+  omniauth-twitter (~> 1.4)
   pg (~> 0.18.4)
   pry-byebug
   puma (~> 3.11)

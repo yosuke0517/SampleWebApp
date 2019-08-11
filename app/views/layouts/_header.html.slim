@@ -12,10 +12,10 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
             = link_to "ユーザ一覧", admin_users_path, class: "nav-link btn btn-outline-light mr-sm-2 my-2 my-sm-0"
         li.nav-item.active
           = link_to "Logout", logout_path, method: :delete , class: "nav-link btn btn-outline-light mr-sm-2 my-2 my-sm-0"
+        li.nav-item.active
+          = link_to "マイページ", "#", class: "nav-link btn btn-outline-light mr-sm-2 my-2 my-sm-0"
       - else
         li.nav-item.active
           = link_to "Sign up", signup_path, class: "nav-link btn btn-outline-light mr-sm-2 my-2 my-sm-0"
         li.nav-item.active
           = link_to "Login", login_path, class: "nav-link btn btn-outline-light mr-sm-2 my-2 my-sm-0"
-        li.nav-item.active
-          = link_to "twitter Login", auth_twitter_path, class: "nav-link btn btn-outline-light mr-sm-2 my-2 my-sm-0"
