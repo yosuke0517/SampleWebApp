@@ -21,6 +21,10 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :create] do
     post :confirm,action: :confirm_new, on: :new
   end
-
+  #twitter
+  #twitterログイン
+  get '/auth/twitter', to: 'sessions#create', via: [:get, :post]
+  #twitterログインcallback
+  get '/auth/twitter/callback', to: 'sessions#create', via: [:get, :post]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
