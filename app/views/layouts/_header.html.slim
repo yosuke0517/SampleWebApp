@@ -13,7 +13,7 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
         li.nav-item.active
           = link_to "Logout", logout_path, method: :delete , class: "nav-link btn btn-outline-light mr-sm-2 my-2 my-sm-0"
         li.nav-item.active
-          = link_to "マイページ", "#", class: "nav-link btn btn-outline-light mr-sm-2 my-2 my-sm-0"
+          = link_to "マイページ", user_path(current_user), class: "nav-link btn btn-outline-light mr-sm-2 my-2 my-sm-0"
       - else
         li.nav-item.active
           = link_to "Sign up", signup_path, class: "nav-link btn btn-outline-light mr-sm-2 my-2 my-sm-0"

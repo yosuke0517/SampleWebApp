@@ -1,13 +1,13 @@
 class Admin::UsersController < ApplicationController
   before_action :require_admin
   protect_from_forgery except: :create
-  
+
   PER = 5
 
   def index
     @users = User.all.page(params[:page]).per(PER).order('updated_at DESC')
   end
-  
+
   def new
     @user = User.new
   end

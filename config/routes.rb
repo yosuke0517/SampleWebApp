@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     post :confirm,action: :confirm_new, on: :new
     resources :answers
   end
-  resources :users, only: [:index, :show, :create] do
+  resources :users, only: [:index, :show, :create, :edit, :update] do
     post :confirm,action: :confirm_new, on: :new
   end
   #twitter

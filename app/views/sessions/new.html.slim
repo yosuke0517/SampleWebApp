@@ -1,23 +1,31 @@
-h1 ログイン 
-
+= stylesheet_link_tag 'sessions', media: 'all', 'data-turbolinks-track': 'reload'
+= javascript_include_tag "dist/clipboard.min.js"
+/ h1 ログイン
 = form_with scope: :session, local: true do |f|
  .form-group
    = f.label :email, 'メールアドレス'
-   = f.email_field :email, class: 'form-control', id: 'session_email'
+   = f.email_field :email, class: 'form-control col-md-11', id: 'session_email'
  .form-group
    = f.label :password, 'パスワード'
-   = f.password_field :password, class: 'form-control', id: 'session_password'
+   = f.password_field :password, class: 'form-control col-md-11', id: 'session_password'
  .form-group
-   = f.submit 'ログインする', class: 'btn btn-primary'
+   = f.submit 'ログインする', class: 'btn btn-success',id: 'login_btn'
 h3 SNSログイン
 ul.navbar-nav
-   li.nav-item.active
-          = link_to "twitter Login", auth_twitter_path, class: "btn btn-outline-primary nav-link fa fa-twitter mr-sm-2 my-2 my-sm-2"
+   #twitter.li.nav-item.active
+          = link_to "twitter Login", auth_twitter_path, class: "btn btn-primary nav-link fa fa-twitter mr-sm-2 my-2 my-sm-2"
 div
   h3.text-left ・サンプルユーザー
-  h3 メールアドレス：「sample@email.com」
-  h3 パスワード：「password」
+  h6 email　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　コピー
+  .input-group
+    #email.input.form-control.col-md-10 type="text" value="sample@email.com"sample@email.com
+    #email_btn.button.btn data-clipboard-target="#email" class="fa fa-clipboard"
+  h6 password　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　コピー
+  .input-group
+    #password.input.form-control.col-md-10 type="text" value="password"password
+    #email_btn.button.btn data-clipboard-target="#password" class="fa fa-clipboard"
 div.mt-5
   h5 ※アプリ仕様
   h5 ・シンプルなQ&Aサービス風アプリ
   h5 ・質問・回答の閲覧はログインしていなくてもできるが、その他の機能はログインしていないとできない。
+= javascript_include_tag 'clipbord'

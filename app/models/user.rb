@@ -1,8 +1,8 @@
 class User < ApplicationRecord
     has_many :authorizations
     has_secure_password(validations: false)
-    #has_one_attached :image
-    has_many_attached :image
+    has_one_attached :image
+    #has_many_attached :image
     #before_save { self.email = email.downcase }
     before_save :email_downcase
     validates :name, presence: true, length: {maximum: 50}

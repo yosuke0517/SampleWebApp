@@ -8,7 +8,8 @@ RUN apt-get update -qq && apt-get install -y \
   libpq-dev \
   nodejs \
   vim
-RUN npm install yarn -g
+RUN npm install yarn -g \
+    npm install clipboard --save
 
 ENV APP_ROOT /app
 WORKDIR $APP_ROOT
