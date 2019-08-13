@@ -18,7 +18,7 @@ class User < ApplicationRecord
       #auth["credentials"]にアクセストークン、シークレットなどの情報が入ってます。
       #auth["info"]["email"]にユーザーのメールアドレスが入ってます。(Twitterはnil)
         create! do |user|
-            user.provider = auth[:provider]
+            #user.provider = auth[:provider]
             user.uid = auth[:uid]
             user.name = auth[:info][:name]
             #user.image = auth[:info][:image]
