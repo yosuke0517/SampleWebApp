@@ -1,3 +1,51 @@
 // Place all the styles related to the sessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+// .container {
+//     background: image-url("login.jpg") center center / cover no-repeat fixed;
+//     padding-top: 50px;
+//     flex: 1;
+//   }
+
+h1,h3 {
+    // color: white;
+    margin-bottom: 0px;
+}
+
+// h1,h3,h6 {
+//     // color: white;
+//     margin-left: 90px;
+// }
+
+// .form-group,navbar-nav {
+//     // color: white;
+//     margin-left: 90px;
+// }
+
+// .nav-item.active {
+//     margin-left: 90px;
+// }
+
+.fa-clipboard {
+    background-color: whitesmoke;
+
+}
+
+#email {
+    // margin-left: 90px;
+    width: 50%;
+}
+
+#password {
+    // margin-left: 90px;
+    width: 50%;
+}
+
+.fa-twitter {
+    background-color: white;
+    color: #00acee;
+}
+
+#login_btn {
+    background-color: green;
+}
