@@ -9,7 +9,6 @@ class Authorization < ApplicationRecord
     end
     def Authorization.create_from_auth(auth, user = nil)
         user ||= User.create_from_auth!(auth)
-        # Authorization.create!(:user => user, :uid => auth['uid'], :provider => auth['provider'])
         Authorization.create!(:user => user, :uid => auth['uid'], :provider => auth['provider'])
     end
 end
