@@ -15,5 +15,9 @@ h1 登録内容の確認（ユーザ登録）
         th = User.human_attribute_name(:password)
         td = 'パスワードはセキュリティの都合で表示されません'
         = f.hidden_field :password
+      tr
+        th = User.human_attribute_name(:image)
+        td = image_tag @user.image, size:'400x400'
+        = f.hidden_field :image, value: f.object.image.signed_id
   = f.submit "戻る", name: 'back', class: "btn btn-success mt-3 mr-3"
   = f.submit "Save", class: "btn btn-primary mt-3"
