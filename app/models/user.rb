@@ -21,7 +21,7 @@ class User < ApplicationRecord
             user.provider = auth[:provider]
             user.uid = auth[:uid]
             user.name = auth[:info][:name]
-            user.image = auth[:info][:image]
+            #user.image = auth[:info][:image]
             user.token = auth[:credentials][:token]
             user.secret = auth[:credentials][:secret]
         end
