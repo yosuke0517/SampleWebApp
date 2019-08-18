@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'relationships/create'
+  get 'relationships/destroy'
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
@@ -20,7 +22,12 @@ Rails.application.routes.draw do
   end
   resources :users, only: [:index, :show, :create, :edit, :update] do
     post :confirm,action: :confirm_new, on: :new
+    member do
+      get :followings
+      get :followers
+    end
   end
+  resources :relationships, only: [:create, :destroy]
   #twitter
   #twitterログイン
   get '/auth/twitter', to: 'sessions#create', via: [:get, :post]

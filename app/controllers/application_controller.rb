@@ -16,4 +16,17 @@ class ApplicationController < ActionController::Base
         @questions_count = @search.result(distinct: true).page(params[:page]).per(Settings.service.PER).order('updated_at DESC')
     end
 
+    def login_requered
+        unless current_user
+          flash[:warning] = 'ログインまたはサインアップをしてください。'
+          redirect_to login_path
+        end
+    end
+
+    def counts(user)
+        @count_questions = user.questions.count
+        @count_followings = user.followings.count
+        @count_followers = user.followers.count
+    end
+
 end
