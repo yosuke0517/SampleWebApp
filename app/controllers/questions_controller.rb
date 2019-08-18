@@ -70,12 +70,4 @@ class QuestionsController < ApplicationController
   def question_params
       params.require(:question).permit(:name, :title, :content, :user_id, :author)
   end
-
-  def login_requered
-      unless current_user
-        flash[:warning] = 'ログインまたはサインアップをしてください。'
-        redirect_to login_path
-      end
-  end
-
 end

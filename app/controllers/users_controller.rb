@@ -7,6 +7,11 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @questions = @user.questions.where(user_id: @user.id)
+    @answers = Answer.where(user_id: @user.id)
+    #@answered_questions = @questions.where(id: @answers.to_a)
+    @followings = @user.followings.page(params[:page])
+    @followers = @user.followers.page(params[:page])
   end
 
   def new
@@ -50,6 +55,18 @@ class UsersController < ApplicationController
       flash[:danger] = '質問の更新に失敗しました。'
       render :edit
     end
+  end
+
+  def followings
+    @user = User.find(params[:id])
+    @followings = @user.followings.page(params[:page])
+    counts(@user)
+  end
+
+  def followers
+    @user = User.find(params[:id])
+    @followers = @user.followers.page(params[:page])
+    counts(@user)
   end
 
   private

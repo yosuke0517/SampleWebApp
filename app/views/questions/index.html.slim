@@ -15,7 +15,7 @@
           td[width="10%"]
             = question.id
           td[width="15%"]
-            = question.author
+            = link_to question.author, user_path(question.user_id)
           td[width="50%"]
             = link_to question.title, question_path(question)
           td[width="25%"]

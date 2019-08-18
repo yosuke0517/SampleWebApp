@@ -7,8 +7,6 @@
           .card-body
             = image_tag @user.image.variant(resize:'400x400').processed
             /= image_tag @user.image, size:'400x400'
-        .ul[style="float: left;list-style: none;margin: 30px;"]
-          .li = "email：#{@user.email}"
   / - elsif @user.provider?
   /     aside.col-xs-4
   /       .card[style="width: 30rem;"]
@@ -25,23 +23,33 @@
             = @user.name
           .card-body
             = image_tag ('noimage'), size: '400x400'
-        .ul[style="float: left;list-style: none;margin: 30px;"]
+  - if current_user == @user
+      .ul[style="float: left;list-style: none;margin: 30px;"]
+            .li = link_to '編集', edit_user_path(@user), class: 'btn btn-outline-success mb-3'
+            .li = render 'relationships/follow_button', { user: @user }
             .li = "email：#{@user.email}"
-  .col-xs-8
-    ul.nav.nav-tabs
-      li.nav-item
-        a.nav-link.active
-          | Questions(まだダミー)
-      li.nav-item
-        a.nav-link
-          | Answers(まだダミー)
-      li.nav-item
-        a.nav-link
-          | Followings(まだダミー)
-      li.nav-item
-        a.nav-link
-          | Followers(まだダミー)
+  - else
+      .ul[style="float: left;list-style: none;margin: 30px;"]
+            .li = render 'relationships/follow_button', { user: @user }
+.col-xs-8
+  nav
+    #nav-tab.nav.nav-tabs role="tablist"
+      a#nav-home-tab.nav-item.nav-link.active aria-controls="nav-home" aria-selected="true" data-toggle="tab" href="#nav-home" role="tab" class="col-md-3"
+        =  "Questions：#{@questions.count}"
+      a#nav-profile-tab.nav-item.nav-link aria-controls="nav-profile" aria-selected="false" data-toggle="tab" href="#nav-profile" role="tab" class="col-md-3"
+        =  "Answers：#{@answers.count}"
+      a#nav-contact-tab.nav-item.nav-link aria-controls="nav-contact" aria-selected="false" data-toggle="tab" href="#nav-contact" role="tab" class="col-md-3"
+        =  "Follows：#{@followings.count}"
+      a#nav-followers-tab.nav-item.nav-link aria-controls="nav-followers" aria-selected="false" data-toggle="tab" href="#nav-followers" role="tab" class="col-md-3"
+        =  "Followers：#{@followers.count}"
+    #nav-tabContent.tab-content.mt-3
+      #nav-home.tab-pane.active aria-labelledby="nav-home-tab" role="tabpanel"
+        = render 'users/questions', { questions: @questions, user: @user }
+      #nav-profile.tab-pane aria-labelledby="nav-profile-tab" role="tabpanel"
+        /= render 'users/answers', { questions: @answers_questions, user: @user }
+      #nav-contact.tab-pane.fade aria-labelledby="nav-contact-tab" role="tabpanel"
+        = render 'users/followings', { users: @followings }
+      #nav-followers.tab-pane.fade aria-labelledby="nav-followers-tab" role="tabpanel"
+        = render 'users/followers', { users: @followers }
 div
   = link_to '> Home', root_path, class: 'btn btn-outline-primary mt-3'
-div
-  = link_to '編集', edit_user_path(@user), class: 'btn btn-outline-success mt-3'

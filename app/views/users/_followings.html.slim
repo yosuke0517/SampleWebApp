@@ -1,0 +1,19 @@
+.row
+  aside.col-xs-4
+    - users.each do |user|
+        .panel.panel-default
+        .panel-heading
+          h3.panel-title= user.name
+        .panel-body
+          = link_to user_path
+            img.media-object.img-rounded.img-responsive alt="" src="#{gravatar_url(user, { size: 200 })}"
+          - unless current_user == user
+            - if current_user.following?(user)
+              = form_with model: current_user.relationships.find_by(follow_id: user.id), html: { method: :delete } do |f|
+                = hidden_field_tag :follow_id, user.id
+                = f.submit 'Unfollow', class: 'btn btn-danger'
+            - else
+              = form_with model: current_user.relationships.build do |f|
+                = hidden_field_tag :follow_id, user.id
+                = f.submit 'Follow', class: 'btn btn-primary'
+    / = render 'users', users: @followings
