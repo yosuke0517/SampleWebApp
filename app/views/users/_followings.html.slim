@@ -6,7 +6,11 @@
           h3.panel-title= user.name
         .panel-body
           = link_to user_path(user)
-            img.media-object.img-rounded.img-responsive alt="" src="#{gravatar_url(user, { size: 200 })}"
+            / img.media-object.img-rounded.img-responsive alt="" src="#{gravatar_url(user, { size: 200 })}"
+            - if user.image.attached?
+              = image_tag user.image, size:'400x400'
+            - else
+              = image_tag ('noimage'), size: '400x400'
           - unless current_user == user
             - if current_user.following?(user)
               = form_with model: current_user.relationships.find_by(follow_id: user.id), html: { method: :delete } do |f|
