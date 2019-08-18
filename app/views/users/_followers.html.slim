@@ -5,7 +5,7 @@
         .panel-heading
           h3.panel-title= user.name
         .panel-body
-          = link_to user_path
+          = link_to user_path(user)
             img.media-object.img-rounded.img-responsive alt="" src="#{gravatar_url(user, { size: 200 })}"
           - unless current_user == user
             - if current_user.following?(user)
