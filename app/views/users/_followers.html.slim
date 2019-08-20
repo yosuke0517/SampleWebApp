@@ -11,7 +11,7 @@
               = image_tag user.image, size:'200x200'
             - else
               = image_tag ('noimage'), size: '200x200'
-          - unless current_user.nil?
+          - if current_user != nil
             - unless current_user == user
               - if current_user.following?(user)
                 = form_with model: current_user.relationships.find_by(follow_id: user.id), html: { method: :delete } do |f|
