@@ -9,6 +9,8 @@
 - Circleci（CI/CDパイプライン構築）
 - AWS(ECR,ECS,EC2,RDS,Route53,S3(ログ、画像))
 - Terraform: 0.11.13
+- AWSでのインフラ構築についてQiitaへ投稿（インプット編）：https://qiita.com/sukezane/items/0325b8057492459c702c
+  - 実装編も9月中に投稿予定。
 
 ### Q&A風サービス
 ### 実装済みの機能
