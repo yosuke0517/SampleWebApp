@@ -35,18 +35,22 @@
   nav
     #nav-tab.nav.nav-tabs role="tablist"
       a#nav-home-tab.nav-item.nav-link.active aria-controls="nav-home" aria-selected="true" data-toggle="tab" href="#nav-home" role="tab" class="col-md-3"
-        =  "Questions：#{@questions.count}"
+        / =  "Questions：#{@questions.count}"
+        =  "Questions：#{@user.questions.count}"
       a#nav-profile-tab.nav-item.nav-link aria-controls="nav-profile" aria-selected="false" data-toggle="tab" href="#nav-profile" role="tab" class="col-md-3"
-        =  "Answers：#{@answers.map(&:question).count}"
+        / =  "Answers：#{@answers.map(&:question).count}"
+        =  "AnsweredQuestions：#{@user.answers.map(&:question).count}"
       a#nav-contact-tab.nav-item.nav-link aria-controls="nav-contact" aria-selected="false" data-toggle="tab" href="#nav-contact" role="tab" class="col-md-3"
         =  "Follows：#{@followings.count}"
       a#nav-followers-tab.nav-item.nav-link aria-controls="nav-followers" aria-selected="false" data-toggle="tab" href="#nav-followers" role="tab" class="col-md-3"
         =  "Followers：#{@followers.count}"
     #nav-tabContent.tab-content.mt-3
       #nav-home.tab-pane.active aria-labelledby="nav-home-tab" role="tabpanel"
-        = render 'users/questions', { questions: @questions, user: @user }
+        / = render 'users/questions', { questions: @questions, user: @user }
+        = render 'users/questions', { user: @user }
       #nav-profile.tab-pane aria-labelledby="nav-profile-tab" role="tabpanel"
-        = render 'users/answers', { user: @user ,anwers: @answers}
+        / = render 'users/answers', { user: @user ,anwers: @answers}
+        = render 'users/answers', { user: @user }
       #nav-contact.tab-pane.fade aria-labelledby="nav-contact-tab" role="tabpanel"
         = render 'users/followings', { users: @followings }
       #nav-followers.tab-pane.fade aria-labelledby="nav-followers-tab" role="tabpanel"
