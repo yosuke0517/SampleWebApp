@@ -8,15 +8,16 @@
           = link_to user_path(user)
             / img.media-object.img-rounded.img-responsive alt="" src="#{gravatar_url(user, { size: 200 })}"
             - if user.image.attached?
-              = image_tag user.image, size:'400x400'
+              = image_tag user.image, size:'200x200'
             - else
-              = image_tag ('noimage'), size: '400x400'
-          - unless current_user == user
-            - if current_user.following?(user)
-              = form_with model: current_user.relationships.find_by(follow_id: user.id), html: { method: :delete } do |f|
-                = hidden_field_tag :follow_id, user.id
-                = f.submit 'Unfollow', class: 'btn btn-danger'
-            - else
-              = form_with model: current_user.relationships.build do |f|
-                = hidden_field_tag :follow_id, user.id
-                = f.submit 'Follow', class: 'btn btn-primary'
+              = image_tag ('noimage'), size: '200x200'
+          - unless current_user.nil?
+            - unless current_user == user
+              - if current_user.following?(user)
+                = form_with model: current_user.relationships.find_by(follow_id: user.id), html: { method: :delete } do |f|
+                  = hidden_field_tag :follow_id, user.id
+                  = f.submit 'Unfollow', class: 'btn btn-danger'
+              - else
+                = form_with model: current_user.relationships.build do |f|
+                  = hidden_field_tag :follow_id, user.id
+                  = f.submit 'Follow', class: 'btn btn-primary'

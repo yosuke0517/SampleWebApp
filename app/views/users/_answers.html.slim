@@ -4,7 +4,7 @@ table.table.table-striped.table-condensed
         th#table_id ID
         th#table_title タイトル
   tbody
-    - @answers.map(&:question).each do |question|
+    - @user.answers.map(&:question).each do |question|
       tr
         td[width="50%"]
           = question.id
