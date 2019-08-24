@@ -1,19 +1,10 @@
-/ .article-link
-/ table.table.table-striped.table-condensed
-/   tbody#search_check
-/       - questions.each do |question|
-/       tr
-/           td[width="50%"]
-/             = question.id
-/           td[width="50%"]
-/             = link_to question.title, question_path(question)
 table.table.table-striped.table-condensed
   thead.thead-light
       tr
         th#table_id ID
         th#table_title タイトル
   tbody
-    - user.questions.each do |question|
+    - questions.each do |question|
       tr
         td[width="50%"]
           = question.id

@@ -6,10 +6,10 @@ class UsersController < ApplicationController
   end
 
   def show
-    # @user = User.find(params[:id])
-    # @questions = @user.questions.where(user_id: @user)
-    # @answers = Answer.includes(:question).where(user_id: @user)
-    @user = User.includes(:questions, :answers).find(params[:id])
+    @user = User.find(params[:id])
+    @questions = @user.questions.where(user_id: @user)
+    @answers = Answer.includes(:question).where(user_id: @user).uniq
+    # @user = User.includes(:questions, :answers).find(params[:id])
     @followings = @user.followings.page(params[:page])
     @followers = @user.followers.page(params[:page])
   end
