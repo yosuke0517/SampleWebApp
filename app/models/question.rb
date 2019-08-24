@@ -1,5 +1,6 @@
 class Question < ApplicationRecord
 has_many :answers, dependent: :destroy
+has_many_attached :images
 belongs_to :user
   validates :name, presence: false
   validates :title, presence: true
