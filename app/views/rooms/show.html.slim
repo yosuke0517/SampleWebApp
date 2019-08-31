@@ -1,0 +1,40 @@
+= stylesheet_link_tag    'messages', media: 'all', 'data-turbolinks-track': 'reload'
+#dm-zone
+  h1 DM
+  h4 参加者
+  - @entries.each do |e|
+    h5
+      strong
+        a href="/users/#{e.user.id}"
+          - if e.user.name == current_user.name
+            = e.user.name
+          - else
+            = e.user.name + "さん"
+  hr
+  - if @messages.present?
+    - @messages.each do |m|
+      - if m.user.name == current_user.name
+        p.text-right
+         = m.content
+        p.text-right
+          | by
+          strong
+            a href="/users/#{m.user_id}"
+              = m.user.name
+      - else
+        p
+         = m.content
+        p
+          | by
+          strong
+            a href="/users/#{m.user_id}"
+              = m.user.name + "さん"
+      hr
+  - else
+    h3.text-center メッセージはまだありません
+= form_with model: @message, local: true do |f|
+  = f.text_field :content, class: 'form-control', :placeholder => "メッセージを入力して下さい" , :size => 70
+  = f.hidden_field :room_id, :value => @room.id
+  br
+  = f.submit "投稿する", class: 'btn btn-info mt-2'
+= link_to "ユーザ一覧", users_path, class: 'btn btn-outline-primary mt-2'

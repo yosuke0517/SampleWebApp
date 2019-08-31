@@ -9,6 +9,27 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @questions = @user.questions.where(user_id: @user)
     @answers = Answer.includes(:question).where(user_id: @user).uniq
+    #自分が参加しているメッセージルーム情報を取得する
+    @currentUserEntry = Entry.where(user_id: current_user.id)
+    #洗濯したユーザのメッセージルーム情報を取得する
+    @userEntry = Entry.where(user_id: @user.id)
+
+    #current_userと選択したユーザ間に共通のメッセージルームが存在すればフラグを立てる
+    unless @user.id == current_user.id
+      @currentUserEntry.each do |cu|
+        @userEntry.each do |u|
+          if cu.room_id == u.room_id then
+            @isRoom = true
+            @roomId = cu.room_id
+          end
+        end
+      end
+      #無ければ作る
+      unless @isRoom
+        @room = Room.new
+        @entry = Entry.new
+      end
+    end
     # @user = User.includes(:questions, :answers).find(params[:id])
     @followings = @user.followings.page(params[:page])
     @followers = @user.followers.page(params[:page])
