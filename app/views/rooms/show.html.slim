@@ -29,10 +29,10 @@
           strong
             a href="/users/#{m.user_id}"
               = m.user.name + "さん"
-      hr/
+      hr
   - else
     h3.text-center メッセージはまだありません
-= form_for @message do |f|
+= form_with model: @message, local: true do |f|
   = f.text_field :content, class: 'form-control', :placeholder => "メッセージを入力して下さい" , :size => 70
   = f.hidden_field :room_id, :value => @room.id
   br

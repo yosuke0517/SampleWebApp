@@ -6,16 +6,6 @@
             = @user.name
           .card-body
             = image_tag @user.image.variant(resize:'400x400').processed
-            /= image_tag @user.image, size:'400x400'
-  / - elsif @user.provider?
-  /     aside.col-xs-4
-  /       .card[style="width: 30rem;"]
-  /         h3.card-title
-  /           = @user.name
-  /         .card-body
-  /           = image_tag @user.image, size:'400x400'
-  /       .ul[style="float: left;list-style: none;margin: 30px;"]
-  /         .li = "email：#{@user.email}"
   - else
       aside.col-xs-4
         .card[style="width: 30rem;"]
@@ -29,13 +19,13 @@
             .li = render 'relationships/follow_button', { user: @user }
             .li = "email：#{@user.email}"
   - else
-      / チャットがすでにある場合はチャットへのリンク
+      / チャットがすでにある場合はチャットへのリンク(showアクション)
       - if @isRoom == true
         .ul.mt-4.ml-4[style="float: left;list-style: none;"]
           .li
            a.btn.btn-info.ml-2 href="/rooms/#{@roomId}"  チャットへ
-      - else# チャットを開始していない時
-        = form_for @room do |f|
+      - else# チャットを開始していない時はcreateアクションへ飛ぶ
+        = form_with model: @room, local: true do |f|
           = fields_for @entry do |e|
             = e.hidden_field :user_id, :value=> @user.id
           = f.submit "チャットを始める" ,class: 'btn btn-outline-info mt-4 ml-4'

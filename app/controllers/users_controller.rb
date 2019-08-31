@@ -9,12 +9,13 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @questions = @user.questions.where(user_id: @user)
     @answers = Answer.includes(:question).where(user_id: @user).uniq
+    #自分が参加しているメッセージルーム情報を取得する
     @currentUserEntry = Entry.where(user_id: current_user.id)
+    #洗濯したユーザのメッセージルーム情報を取得する
     @userEntry = Entry.where(user_id: @user.id)
-    # Entryモデル：どのUserがどのRoomに所属しているか
-    # ユーザの詳細を取得した際に自分自身でない時DMをするためのRoomとEntryを確保する
-    if @user.id == current_user.id
-    else
+
+    #current_userと選択したユーザ間に共通のメッセージルームが存在すればフラグを立てる
+    unless @user.id == current_user.id
       @currentUserEntry.each do |cu|
         @userEntry.each do |u|
           if cu.room_id == u.room_id then
@@ -23,8 +24,8 @@ class UsersController < ApplicationController
           end
         end
       end
-      if @isRoom
-      else
+      #無ければ作る
+      unless @isRoom
         @room = Room.new
         @entry = Entry.new
       end
