@@ -2,6 +2,8 @@ class User < ApplicationRecord
     has_many :authorizations
     has_secure_password(validations: false)
     has_one_attached :image
+    has_many :messages, dependent: :destroy
+    has_many :entries, dependent: :destroy
     #has_many_attached :images
     #before_save { self.email = email.downcase }
     before_save :email_downcase

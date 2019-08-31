@@ -1,15 +1,17 @@
-- if users.any?
-  ul
-    - users.each do |user|
-      li
-        .media
-          |  <img class="mr-3" src="
-          = gravatar_url(user, {size: 50 })
-          | %" alt="" >
-        .media-body
-          div
-            = user.name
-          div
-            p
-              = link_to 'View profile', user_path(user)
-  = paginate users
+- unless users.nil?
+  - if users.any?
+    ul.media-list
+      - users.each do |user|
+        li.media
+          .media-left
+            / img.media-object.img-rounded alt="" src="#{gravatar_url(user, { size: 50 })}"
+            - if user.image.attached?
+              = image_tag user.image, size:'200x200'
+            - else
+              = image_tag ('noimage'), size: '200x200'
+          .media-body
+            div
+              = user.name
+            div
+              p= link_to 'View profile', user_path(user),class: 'btn btn-primary ml-2'
+    = paginate users

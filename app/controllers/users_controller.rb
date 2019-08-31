@@ -9,6 +9,26 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @questions = @user.questions.where(user_id: @user)
     @answers = Answer.includes(:question).where(user_id: @user).uniq
+    @currentUserEntry = Entry.where(user_id: current_user.id)
+    @userEntry = Entry.where(user_id: @user.id)
+    # Entryモデル：どのUserがどのRoomに所属しているか
+    # ユーザの詳細を取得した際に自分自身でない時DMをするためのRoomとEntryを確保する
+    if @user.id == current_user.id
+    else
+      @currentUserEntry.each do |cu|
+        @userEntry.each do |u|
+          if cu.room_id == u.room_id then
+            @isRoom = true
+            @roomId = cu.room_id
+          end
+        end
+      end
+      if @isRoom
+      else
+        @room = Room.new
+        @entry = Entry.new
+      end
+    end
     # @user = User.includes(:questions, :answers).find(params[:id])
     @followings = @user.followings.page(params[:page])
     @followers = @user.followers.page(params[:page])

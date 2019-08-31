@@ -29,7 +29,17 @@
             .li = render 'relationships/follow_button', { user: @user }
             .li = "email：#{@user.email}"
   - else
-      .ul[style="float: left;list-style: none;margin: 30px;"]
+      / チャットがすでにある場合はチャットへのリンク
+      - if @isRoom == true
+        .ul.mt-4.ml-4[style="float: left;list-style: none;"]
+          .li
+           a.btn.btn-info.ml-2 href="/rooms/#{@roomId}"  チャットへ
+      - else# チャットを開始していない時
+        = form_for @room do |f|
+          = fields_for @entry do |e|
+            = e.hidden_field :user_id, :value=> @user.id
+          = f.submit "チャットを始める" ,class: 'btn btn-outline-info mt-4 ml-4'
+      .ul.mt-4.ml-4[style="float: left;list-style: none;"]
             .li = render 'relationships/follow_button', { user: @user }
 .col-xs-8
   nav
