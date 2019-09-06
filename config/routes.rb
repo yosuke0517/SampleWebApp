@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get 'answers/edit'
   resources :questions do
     post :confirm,action: :confirm_new, on: :new
+    resources :likes, only: [:create, :destroy]
     resources :answers
   end
   resources :users, only: [:index, :show, :create, :edit, :update] do

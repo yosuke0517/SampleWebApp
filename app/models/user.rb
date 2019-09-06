@@ -4,6 +4,8 @@ class User < ApplicationRecord
     has_one_attached :image
     has_many :messages, dependent: :destroy
     has_many :entries, dependent: :destroy
+    has_many :likes, dependent: :destroy
+    has_many :liked_questions, through: :likes, source: :question
     #has_many_attached :images
     #before_save { self.email = email.downcase }
     before_save :email_downcase
@@ -35,6 +37,10 @@ class User < ApplicationRecord
 
     def following?(other_user)
         self.followings.include?(other_user)
+    end
+
+    def already_liked?(question)
+        self.likes.exists?(question_id: question.id)
     end
 
     def User.create_from_auth!(auth)

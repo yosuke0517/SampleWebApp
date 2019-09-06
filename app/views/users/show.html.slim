@@ -34,16 +34,18 @@
 .col-xs-8
   nav
     #nav-tab.nav.nav-tabs role="tablist"
-      a#nav-home-tab.nav-item.nav-link.active aria-controls="nav-home" aria-selected="true" data-toggle="tab" href="#nav-home" role="tab" class="col-md-3"
+      a#nav-home-tab.nav-item.nav-link.active aria-controls="nav-home" aria-selected="true" data-toggle="tab" href="#nav-home" role="tab" class="col-md-2"
         / =  "Questions：#{@questions.count}"
         =  "Questions：#{@user.questions.count}"
       a#nav-profile-tab.nav-item.nav-link aria-controls="nav-profile" aria-selected="false" data-toggle="tab" href="#nav-profile" role="tab" class="col-md-3"
         / =  "Answers：#{@answers.map(&:question).count}"
         =  "AnsweredQuestions：#{@user.answers.select(:question_id).distinct.count}"
-      a#nav-contact-tab.nav-item.nav-link aria-controls="nav-contact" aria-selected="false" data-toggle="tab" href="#nav-contact" role="tab" class="col-md-3"
+      a#nav-contact-tab.nav-item.nav-link aria-controls="nav-contact" aria-selected="false" data-toggle="tab" href="#nav-contact" role="tab" class="col-md-2"
         =  "Follows：#{@followings.count}"
-      a#nav-followers-tab.nav-item.nav-link aria-controls="nav-followers" aria-selected="false" data-toggle="tab" href="#nav-followers" role="tab" class="col-md-3"
+      a#nav-followers-tab.nav-item.nav-link aria-controls="nav-followers" aria-selected="false" data-toggle="tab" href="#nav-followers" role="tab" class="col-md-2"
         =  "Followers：#{@followers.count}"
+      a#nav-likes-tab.nav-item.nav-link aria-controls="nav-likes" aria-selected="false" data-toggle="tab" href="#nav-likes" role="tab" class="col-md-2"
+        =  "likes：#{@user.liked_questions.count}"
     #nav-tabContent.tab-content.mt-3
       #nav-home.tab-pane.active aria-labelledby="nav-home-tab" role="tabpanel"
         / = render 'users/questions', { questions: @questions, user: @user }
@@ -55,5 +57,7 @@
         = render 'users/followings', { users: @followings }
       #nav-followers.tab-pane.fade aria-labelledby="nav-followers-tab" role="tabpanel"
         = render 'users/followers', { users: @followers }
+      #nav-likes.tab-pane.fade aria-labelledby="nav-likes-tab" role="tabpanel"
+        = render 'users/likes', { user: @user }
 div
   = link_to '> Home', root_path, class: 'btn btn-outline-primary mt-3'

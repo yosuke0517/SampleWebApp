@@ -3,10 +3,10 @@
     h2
       = @question.title
     div
-      |  質問内容: 
+      |  質問内容:
       == @question.content
     div
-      |  Name: 
+      |  Name:
       = @question.name
     hr
     div
@@ -51,5 +51,18 @@
         = f.submit "Post", class: 'btn btn-primary'
   div
     = link_to '> Home', root_path, class: 'btn btn-outline-primary mb-3 ml-3'
+h3
+  | いいね件数: #{@question.likes.count}
+- if current_user.already_liked?(@question)
+  #like
+    = button_to 'いいねを取り消す', question_like_path(@question),method: :delete,class: 'btn btn-outline-success'
+    i.fa.fa-thumbs-o-up aria-hidden="true"
+- else
+  #like
+    = button_to 'いいね', question_likes_path(@question),method: :post,class: 'btn btn-outline-success'
+    i.fa.fa-thumbs-o-up aria-hidden="true"
+h2 いいねしたユーザー
+- @question.liked_users.each do |user|
+  li= user.name
 //javascript:
 //    CKEDITOR.replace('editor', {});
