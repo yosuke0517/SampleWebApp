@@ -91,4 +91,5 @@ gem "mini_magick", ">= 4.9.4"
 gem 'omniauth', '~> 1.9'
 gem 'omniauth-twitter', '~> 1.4'
 gem 'bootstrap-social-rails', '~> 4.12'
+gem 'jquery-ui-rails'
 gem 'font-awesome-rails', '~> 4.7'

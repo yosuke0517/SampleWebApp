@@ -12,6 +12,7 @@ class QuestionsController < ApplicationController
 
   def show
     @answer = Answer.new
+    @like = Like.new
   end
 
   def new
